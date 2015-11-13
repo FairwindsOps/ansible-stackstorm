@@ -1,0 +1,32 @@
+---
+# tasks file for stackstorm
+
+- name: install packages
+  become: true
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items:
+   - build-essential
+   - unzip
+   - python-pip
+   - python-dev
+   - git
+   - mysql-client
+   - python-mysqldb
+  tags:
+    - packages
+
+
+- name: make temporary dir
+  register: mktemp
+  command: mktemp -d
+
+- name: run unattended installation
+  get_url:
+    url: 'http://stackstorm.com/install.sh'
+    dest: "{{mktemp.stdout}}/install.sh"
+
+    # - name: run install.sh
+    #   shell: install.sh
+    #   args:
+    #     chdir: "{{mktemp.stdout}}"
+    #     creates: 
