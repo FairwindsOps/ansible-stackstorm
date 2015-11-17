@@ -15,10 +15,11 @@
   tags:
     - packages
 
-
 - name: make temporary dir
   register: mktemp
   command: mktemp -d
+
+- include: deployment.yml
 
 - name: run unattended installation
   get_url:
@@ -30,3 +31,4 @@
     #   args:
     #     chdir: "{{mktemp.stdout}}"
     #     creates: 
+
