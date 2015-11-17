@@ -9,4 +9,4 @@ galaxy_info:
     - stackstorm
     - st2
 dependencies:
-    - reactiveops.packer
+    - reactiveops.packer-master
