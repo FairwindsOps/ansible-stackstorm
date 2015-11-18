@@ -9,5 +9,5 @@ galaxy_info:
     - stackstorm
     - st2
 dependencies:
-    - {role: 'Stouts.users-sairez', users_users: "{{deploy_user}}", become: true}
+    - {role: 'Stouts.users-master', users_users: "{{deploy_user}}", become: true }
     - reactiveops.packer-master
