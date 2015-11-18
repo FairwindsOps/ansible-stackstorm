@@ -19,8 +19,6 @@
   register: mktemp
   command: mktemp -d
 
-- include: deployment.yml
-
 - name: run unattended installation
   get_url:
     url: 'http://stackstorm.com/install.sh'
