@@ -12,8 +12,17 @@
    - git
    - mysql-client
    - python-mysqldb
+   - awscli
   tags:
     - packages
+
+- name: install pip modules
+  become: true
+  become_user: root
+  pip: name={{ item }}
+  with_items:
+    - mysql-python
+    - boto
 
 - name: make temporary dir
   register: mktemp
@@ -28,5 +37,4 @@
     #   shell: install.sh
     #   args:
     #     chdir: "{{mktemp.stdout}}"
-    #     creates: 
-
+    #     creates:
