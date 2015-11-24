@@ -1,10 +1,10 @@
 ---
 # defaults file for stackstorm
 
-# stack_name: support
-# this shouldn't be necessary with profiles
-#secrets_bucket: 'unset'
-
-
-
+deploy_user:
+  - name: 'deploy'
+    uid: '2000'
+    gid: '2000'
+    shell: '/bin/bash'
+    generate_ssh_key: 'yes'
 
