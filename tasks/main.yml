@@ -12,21 +12,14 @@
    - git
    - mysql-client
    - python-mysqldb
+   - awscli
   tags:
     - packages
 
-- name: make temporary dir
-  register: mktemp
-  command: mktemp -d
-
-- name: run unattended installation
+- name: get install script
   get_url:
     url: 'http://stackstorm.com/install.sh'
-    dest: "{{mktemp.stdout}}/install.sh"
+    dest: "{{st2_install_script_path}}"
 
-    # - name: run install.sh
-    #   shell: install.sh
-    #   args:
-    #     chdir: "{{mktemp.stdout}}"
-    #     creates: 
-
+- include: configure.yml
+- include: st2-users.yml

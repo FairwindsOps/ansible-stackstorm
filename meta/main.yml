@@ -8,6 +8,5 @@ galaxy_info:
   galaxy_tags:
     - stackstorm
     - st2
-dependencies:
-    - {role: 'Stouts.users-master', users_users: "{{deploy_user}}", become: true }
-    - reactiveops.packer-master
+dependencies: []
+    # - {role: 'Stouts.users-master', users_users: "{{deploy_user}}", become: true }
