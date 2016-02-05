@@ -44,3 +44,7 @@ Example Playbook
   roles:
    - reactiveops.stackstorm-master
 ```
+
+# Notes
+
+* Avoid using characters for passwords that might break the templated configuration files.
