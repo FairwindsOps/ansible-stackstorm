@@ -1,0 +1,143 @@
+{% raw %}
+#!/bin/sh
+#
+# This file is managed by Puppet and local changes
+# may be overwritten
+#
+#    /etc/rc.d/init.d/<servicename>
+#
+#    Daemon for hubot
+#
+# chkconfig: 2345 97 15
+# description: Docker container for hubot
+
+### BEGIN INIT INFO
+# Provides:       docker-hubot
+# Required-Start: $network docker
+# Required-Stop: $network docker
+# Should-Start:
+# Should-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop:  0 1 6
+# Short-Description: start and stop docker container for hubot
+# Description: Docker container for hubot
+### END INIT INFO
+
+if [ -e /etc/init.d/functions ]; then
+    . /etc/init.d/functions
+elif [ -e /lib/lsb/init-functions ]; then
+    . /lib/lsb/init-functions
+    failure() {
+        log_failure_msg "$@"
+        return 1
+    }
+    success() {
+        log_success_msg "$@"
+        return 0
+    }
+else
+    failure() {
+        echo "fail: $@" >&2
+        exit 1
+    }
+    success() {
+        echo "success: $@" >&2
+        exit 0
+    }
+fi
+
+export HOME=/root/
+docker="/usr/bin/docker"
+prog="docker-hubot"
+if [ -d /var/lock/subsys ]; then
+    lockfile="/var/lock/subsys/$prog"
+else
+    unset lockfile
+fi
+
+start() {
+    [ -x $docker ] || exit 5
+
+    if [ "true" = "$($docker inspect --format='{{.State.Running}}' hubot)" ]; then
+       failure
+       printf "Container hubot is still running.\n"
+       exit 7
+    fi
+{% endraw %}
+
+    printf "Starting $prog:\t"
+    $docker rm hubot >/dev/null 2>&1
+        $docker run \
+    --net bridge -m 0b --detach=true -e ST2_AUTH_USERNAME={{st2_chatops_username}} -e ST2_AUTH_URL=https://{{st2_web_subdomain}}.{{st2_domain}}:443/auth -e HUBOT_SLACK_TOKEN={{st2_hubot_slack_token}} -e ST2_WEBUI_URL=https://{{st2_web_subdomain}}.{{st2_domain}} -e NODE_TLS_REJECT_UNAUTHORIZED={{st2_node_tls_reject_unauthorized}} -e ST2_AUTH_PASSWORD={{st2_chatops_bot_password}} -e EXPRESS_PORT=8081 -e HUBOT_LOG_LEVEL={{st2_hubot_log_level}} -e ST2_API=https://{{st2_web_subdomain}}.{{st2_domain}}/api -e HUBOT_NAME=hubot -e HUBOT_ADAPTER=slack -e HUBOT_ALIAS=! -p 8081:8080 --restart=always --add-host {{st2_system_hostname}}:127.0.0.1 \
+    --name hubot \
+    stackstorm/hubot \
+
+{% raw %}
+    retval=$?
+    echo
+    if [ $retval -eq 0 ]; then
+        success
+    else
+        failure
+    fi
+}
+
+stop() {
+    echo -n "Stopping $prog: "
+        $docker stop hubot
+    $docker rm hubot
+    return $?
+}
+
+clean() {
+    if ! [ -f $cidfile ]; then
+        failure
+        echo
+        printf "$cidfile does not exist.\n"
+    else
+        cid="$(cat $cidfile)"
+	rm $cidfile
+        $docker rm -f $cid
+        retval=$?
+        return $retval
+    fi
+}
+
+case "$1" in
+    start)
+    start
+    ;;
+    stop)
+    stop
+    ;;
+    status)
+    if [ "true" = "$($docker inspect --format='{{.State.Running}}' hubot)" ]; then
+        echo $prog is running
+        exit 0
+    else
+        echo $prog not running
+        exit 1
+    fi
+    ;;
+    restart|reload)
+    stop
+    start
+    ;;
+    clean)
+    clean
+    ;;
+    cleanRestart)
+    stop
+    clean
+    start
+    ;;
+    condrestart)
+    [ -f /var/lock/subsys/$prog ] && restart || :
+    ;;
+    *)
+    echo "Usage: $0 [start|stop|status|reload|restart|probe|clean|cleanRestart]"
+    exit 1
+    ;;
+esac
+exit $?
+{% endraw %}

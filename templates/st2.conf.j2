@@ -1,0 +1,71 @@
+# System-wide configuration
+
+[api]
+# Host and port to bind the API server.
+host = 127.0.0.1
+port = 9101
+logging = /etc/st2api/syslog.conf
+mask_secrets = True
+# allow_origin is required for handling CORS in st2 web UI.
+# allow_origin = http://myhost1.example.com:3000,http://myhost2.example.com:3000
+allow_origin = *
+
+[sensorcontainer]
+logging = /etc/st2reactor/syslog.sensorcontainer.conf
+
+[rulesengine]
+logging = /etc/st2reactor/syslog.rulesengine.conf
+
+[actionrunner]
+logging = /etc/st2actions/syslog.conf
+
+[auth]
+host = 0.0.0.0
+port = 9100
+use_ssl = False
+debug = False
+enable = True
+logging = /etc/st2auth/syslog.conf
+
+mode = standalone
+
+# Note: Settings bellow are only used in "standalone" mode
+backend = pam
+backend_kwargs =
+
+# Base URL to the API endpoint excluding the version (e.g. http://myhost.net:9101/)
+api_url =https://{{st2_web_subdomain}}.{{st2_domain}}/api
+
+[system]
+base_path = /opt/stackstorm
+
+[syslog]
+host = localhost
+port = 514
+facility = local7
+protocol = udp
+
+[log]
+excludes = requests,paramiko
+redirect_stderr = False
+mask_secrets = True
+
+[system_user]
+user = {{st2_system_user}}
+ssh_key_file = /home/{{st2_system_user}}/.ssh/st2_{{st2_system_user}}_key
+
+[messaging]
+url = amqp://guest:guest@localhost:5672/
+
+[ssh_runner]
+remote_dir = /tmp
+use_paramiko_ssh_runner = True
+
+[resultstracker]
+logging = /etc/st2actions/syslog.resultstracker.conf
+
+[notifier]
+logging = /etc/st2actions/syslog.notifier.conf
+
+[garbagecollector]
+logging = /etc/st2reactor/syslog.garbagecollector.conf

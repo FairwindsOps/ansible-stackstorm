@@ -1,5 +1,7 @@
 ---
-# defaults file for stackstorm
+
+st2_install_script_path: '/opt/install.sh'
+st2_answers_file_path: '/etc/st2-answers.yaml'
 
 deploy_user:
   - name: 'deploy'
@@ -8,3 +10,33 @@ deploy_user:
     shell: '/bin/bash'
     generate_ssh_key: 'yes'
 
+# the installer sets the local hostname.
+st2_hostname: 'stackstorm'
+st2_domain: 'example.net'
+
+# FQDN for the host
+st2_system_hostname: "{{st2_hostname}}.{{st2_domain}}"
+
+# subdomain portion of the api url
+st2_web_subdomain: 'st2'
+
+st2_node_tls_reject_unauthorized: '0'
+
+st2_chatops_username: 'chatops_bot'
+st2_chatops_bot_password: 'password'
+st2_hubot_slack_token: 'xoxb-12345'
+
+st2_hubot_log_level: 'debug'
+
+st2_admin_password: 'password'
+
+st2_root_cli_password: 'password'
+
+# Runner (stanley) user properties
+st2_stanley_ssh_private_key: "-----BEGIN RSA PRIVATE KEY-----xxx"
+st2_stanley_ssh_public_key: "AAAAB"
+st2_stanley_username: 'deploy'
+st2_system_user: 'deploy'
+
+# Hubot specific
+st2_hubot_log_level: 'debug'

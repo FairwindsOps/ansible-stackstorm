@@ -1,2 +1,10 @@
 ---
-# handlers file for stackstorm
+
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: restart st2
+  command: st2ctl reload --register-all
+
+- name: restart docker-hubot
+  service: name=docker-hubot state=restarted

@@ -1,0 +1,19 @@
+[api]
+url = https://{{st2_web_subdomain}}.{{st2_domain}}/api
+
+[general]
+base_url = http://localhost
+api_version = v1
+cacert = 
+silence_ssl_warnings = True
+
+[cli]
+debug = False
+cache_token = False
+
+[credentials]
+username = root_cli
+password = {{st2_root_cli_password}}
+
+[auth]
+url = https://{{st2_web_subdomain}}.{{st2_domain}}/auth
