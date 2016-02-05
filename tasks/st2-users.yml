@@ -22,7 +22,7 @@
 
 - name: set chatops_bot password
   user:
-    name: chatops_bot
+    name: "{{st2_chatops_username}}"
     password: "{{mkpasswd_chatops_bot_output.stdout}}"
     update_password: always
   changed_when: false
