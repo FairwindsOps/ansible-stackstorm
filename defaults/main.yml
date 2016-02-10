@@ -37,6 +37,3 @@ st2_stanley_ssh_private_key: "-----BEGIN RSA PRIVATE KEY-----xxx"
 st2_stanley_ssh_public_key: "AAAAB"
 st2_stanley_username: 'deploy'
 st2_system_user: 'deploy'
-
-# Hubot specific
-st2_hubot_log_level: 'debug'
