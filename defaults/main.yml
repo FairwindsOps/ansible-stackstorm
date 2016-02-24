@@ -37,3 +37,5 @@ st2_stanley_ssh_private_key: "-----BEGIN RSA PRIVATE KEY-----xxx"
 st2_stanley_ssh_public_key: "AAAAB"
 st2_stanley_username: 'deploy'
 st2_system_user: 'deploy'
+
+st2_packs_base_paths: ''
