@@ -68,7 +68,7 @@ start() {
     printf "Starting $prog:\t"
     $docker rm hubot >/dev/null 2>&1
         $docker run \
-    --net bridge -m 0b --detach=true -e ST2_AUTH_USERNAME={{st2_chatops_username}} -e ST2_AUTH_URL=https://{{st2_web_subdomain}}.{{st2_domain}}:443/auth -e HUBOT_SLACK_TOKEN={{st2_hubot_slack_token}} -e ST2_WEBUI_URL=https://{{st2_web_subdomain}}.{{st2_domain}} -e NODE_TLS_REJECT_UNAUTHORIZED={{st2_node_tls_reject_unauthorized}} -e ST2_AUTH_PASSWORD={{st2_chatops_bot_password}} -e EXPRESS_PORT=8081 -e HUBOT_LOG_LEVEL={{st2_hubot_log_level}} -e ST2_API=https://{{st2_web_subdomain}}.{{st2_domain}}/api -e HUBOT_NAME=hubot -e HUBOT_ADAPTER=slack -e HUBOT_ALIAS=! -p 8081:8080 --restart=always --add-host {{st2_system_hostname}}:127.0.0.1 \
+    --net bridge -m 0b --detach=true -e ST2_AUTH_USERNAME={{st2_chatops_username}} -e ST2_AUTH_URL=https://{{st2_web_subdomain}}.{{st2_domain}}:443/auth -e HUBOT_SLACK_TOKEN={{st2_hubot_slack_token}} -e ST2_WEBUI_URL=https://{{st2_web_subdomain}}.{{st2_domain}} -e ST2_HOSTNAME={{st2_web_subdomain}}.{{st2_domain}} -e NODE_TLS_REJECT_UNAUTHORIZED={{st2_node_tls_reject_unauthorized}} -e ST2_AUTH_PASSWORD={{st2_chatops_bot_password}} -e EXPRESS_PORT=8081 -e HUBOT_LOG_LEVEL={{st2_hubot_log_level}} -e ST2_API=https://{{st2_web_subdomain}}.{{st2_domain}}/api -e HUBOT_NAME=hubot -e HUBOT_ADAPTER=slack -e HUBOT_ALIAS=! -p 8081:8080 --restart=always --add-host {{st2_system_hostname}}:127.0.0.1 \
     --name hubot \
     stackstorm/hubot \
 
