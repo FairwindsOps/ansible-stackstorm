@@ -1,50 +1,38 @@
-ansible-stackstorm
+Role Name
 =========
 
-Install stackstorm and pre-requisites
+A brief description of the role goes here.
+
+Requirements
+------------
+
+Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
 Role Variables
 --------------
 
-`deploy_user` is supplied to the Stouts.users role to create the deploy user required by StackStorm.  A default is set in defaults/main.yml
+A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
 Dependencies
 ------------
 
-This role depends on the following ansible roles:
-```
-Stouts.users-master
-reactiveops.packer-master
-```
-
-You should add these roles to your ansible-requirements.yml 
-
-```
-- src: git+ssh://git@github.com/reactiveops/ansible-packer
-  version: origin/master
-  name: reactiveops.packer-master
-
-- src: git+ssh://git@github.com/reactiveops/Stouts.users
-  version: origin/master
-  name: Stouts.users-master
-
-- src: git+ssh://git@github.com/reactiveops/ansible-stackstorm
-  version: origin/master
-  name: reactiveops.stackstorm-master
-```
+A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
-```
-- name: configure stackstorm instance
-  hosts: "tag_Env_{{env}},&tag_Stack_{{stack}},&tag_Layer_{{layer}}"
-  user: ubuntu
-  gather_facts: false
-  roles:
-   - reactiveops.stackstorm-master
-```
+Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-# Notes
+    - hosts: servers
+      roles:
+         - { role: username.rolename, x: 42 }
 
-* Avoid using characters for passwords that might break the templated configuration files.
+License
+-------
+
+BSD
+
+Author Information
+------------------
+
+An optional section for the role authors to include contact information, or a website (HTML is not allowed).

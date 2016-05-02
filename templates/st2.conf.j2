@@ -2,22 +2,37 @@
 
 [api]
 # Host and port to bind the API server.
-host = 127.0.0.1
+host = 0.0.0.0
 port = 9101
-logging = /etc/st2api/syslog.conf
+logging = /etc/st2/logging.api.conf
 mask_secrets = True
 # allow_origin is required for handling CORS in st2 web UI.
 # allow_origin = http://myhost1.example.com:3000,http://myhost2.example.com:3000
-allow_origin = *
+
+[stream]
+logging = /etc/st2/logging.stream.conf
 
 [sensorcontainer]
-logging = /etc/st2reactor/syslog.sensorcontainer.conf
+logging = /etc/st2/logging.sensorcontainer.conf
 
 [rulesengine]
-logging = /etc/st2reactor/syslog.rulesengine.conf
+logging = /etc/st2/logging.rulesengine.conf
 
 [actionrunner]
-logging = /etc/st2actions/syslog.conf
+logging = /etc/st2/logging.actionrunner.conf
+virtualenv_opts = --always-copy
+
+[resultstracker]
+logging = /etc/st2/logging.resultstracker.conf
+
+[notifier]
+logging = /etc/st2/logging.notifier.conf
+
+[exporter]
+logging = /etc/st2/logging.exporter.conf
+
+[garbagecollector]
+logging = /etc/st2/logging.garbagecollector.conf
 
 [auth]
 host = 0.0.0.0
@@ -25,22 +40,22 @@ port = 9100
 use_ssl = False
 debug = False
 enable = True
-logging = /etc/st2auth/syslog.conf
+logging = /etc/st2/logging.auth.conf
 
 mode = standalone
 
 # Note: Settings bellow are only used in "standalone" mode
-backend = pam
-backend_kwargs =
+backend = flat_file
+backend_kwargs = {"file_path": "/etc/st2/htpasswd"}
 
 # Base URL to the API endpoint excluding the version (e.g. http://myhost.net:9101/)
-api_url =https://{{st2_web_subdomain}}.{{st2_domain}}/api
+api_url =
 
 [system]
 base_path = /opt/stackstorm
 
 [syslog]
-host = localhost
+host = 127.0.0.1
 port = 514
 facility = local7
 protocol = udp
@@ -51,29 +66,12 @@ redirect_stderr = False
 mask_secrets = True
 
 [system_user]
-user = {{st2_system_user}}
-ssh_key_file = /home/{{st2_system_user}}/.ssh/st2_{{st2_system_user}}_key
+user = {{system_user}}
+ssh_key_file = {{system_user_ssh_key_file}}
 
 [messaging]
-url = amqp://guest:guest@localhost:5672/
+url = amqp://guest:guest@127.0.0.1:5672/
 
 [ssh_runner]
 remote_dir = /tmp
 use_paramiko_ssh_runner = True
-
-[resultstracker]
-logging = /etc/st2actions/syslog.resultstracker.conf
-
-[notifier]
-logging = /etc/st2actions/syslog.notifier.conf
-
-[garbagecollector]
-logging = /etc/st2reactor/syslog.garbagecollector.conf
-
-[content]
-# Path to the directory which contains system packs.
-system_packs_base_path = /opt/stackstorm/packs
-{% if st2_packs_base_paths -%}
-# Paths which will be searched for integration packs.
-packs_base_paths = {{st2_packs_base_paths}}
-{% endif %}

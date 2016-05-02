@@ -1,41 +1,16 @@
 ---
+# defaults file for st2
 
-st2_install_script_path: '/opt/install.sh'
-st2_answers_file_path: '/etc/st2-answers.yaml'
+s2_external_private_key: 'external_private.key'
 
-deploy_user:
-  - name: 'deploy'
-    uid: '2000'
-    gid: '2000'
-    shell: '/bin/bash'
-    generate_ssh_key: 'yes'
 
-# the installer sets the local hostname.
-st2_hostname: 'stackstorm'
-st2_domain: 'example.net'
 
-# FQDN for the host
-st2_system_hostname: "{{st2_hostname}}.{{st2_domain}}"
+st_infrastructure_repo: 'git@github.com:reactiveops/reactr-infrastructure.git'
+st_infrastructure_version: 'berrysmoke'
+# app_git_ref: "rt-reactiveops"
+# app_user_name: "deploy"
+# app_path: "/srv/roadtrippers"
 
-# subdomain portion of the api url
-st2_web_subdomain: 'st2'
 
-st2_node_tls_reject_unauthorized: '0'
-
-st2_chatops_username: 'chatops_bot'
-st2_chatops_bot_password: 'password'
-st2_hubot_slack_token: 'xoxb-12345'
-
-st2_hubot_log_level: 'debug'
-
-st2_admin_password: 'password'
-
-st2_root_cli_password: 'password'
-
-# Runner (stanley) user properties
-st2_stanley_ssh_private_key: "-----BEGIN RSA PRIVATE KEY-----xxx"
-st2_stanley_ssh_public_key: "AAAAB"
-st2_stanley_username: 'deploy'
-st2_system_user: 'deploy'
-
-st2_packs_base_paths: ''
+system_user: 'deploy'
+system_user_ssh_key_file: '/home/deploy/.ssh/id_rsa'
