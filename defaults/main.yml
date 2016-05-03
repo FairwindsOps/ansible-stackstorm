@@ -14,3 +14,6 @@ st_infrastructure_version: 'berrysmoke'
 
 system_user: 'deploy'
 system_user_ssh_key_file: '/home/deploy/.ssh/id_rsa'
+
+
+st2_packer_builds_path: '/opt/packer/builds'

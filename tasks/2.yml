@@ -1,0 +1,64 @@
+---
+
+# The deploy user on the control server needs to be able to ssh to localhost
+# set_known_hosts.sh takes the server's public host key, and populates the ~deploy/.ssh/known_hosts with an entry for localhost, and the server's IP address
+- copy:
+    src: set_known_hosts.sh
+    dest: /usr/local/sbin/set_known_hosts.sh
+    mode: 0700
+    owner: root
+  become: yes
+  become_user: root
+
+- shell: /usr/local/sbin/set_known_hosts.sh
+  args:
+    creates: /etc/ssh/ssh_known_hosts
+  become: yes
+  become_user: root
+##
+# end set_known_hosts.sh
+##
+
+- name: create st2_packer_builds_path
+  file:
+    state: directory
+    owner: deploy
+    path: "{{st2_packer_builds_path}}"
+  become: yes
+  become_user: root
+  tags: user3
+
+
+
+###
+# Scratchpad:
+###
+
+
+# - slurp:
+#     src: /etc/ssh/ssh_host_ecdsa_key.pub
+#   tags: user3
+#   register: slurped
+
+# - fetch:
+#     dest: /dev/null
+#     flat: yes
+#     src: /etc/ssh/ssh_host_ecdsa_key.pub
+#   tags: user3
+#   register: fetched
+#
+#
+# - set_fact:
+#     value
+#
+# - debug: var=fetched
+#   tags: user3
+
+# - name: add our host to the deploy user's known hosts
+#   known_hosts:
+#     path: '/etc/ssh/ssh_known_hosts'
+#     name: 'localhost'
+#     key: "{{ lookup('file', '/etc/ssh/ssh_host_ecdsa_key.pub') }}"
+#     become: yes
+#   become_user: root
+#   tags: user3

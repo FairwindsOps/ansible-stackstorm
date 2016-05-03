@@ -185,6 +185,7 @@
     repo: "{{st_infrastructure_repo}}"
     version: "{{st_infrastructure_version}}"
     dest: /opt/omnia/infrastructure
+    accept_hostkey: true
   become: yes
   become_user: deploy
   tags: omnia
@@ -210,3 +211,5 @@
   become: yes
   become_user: root
   tags: stack-setup
+
+- include: 2.yml
