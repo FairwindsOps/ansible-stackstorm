@@ -8,7 +8,6 @@
   become_user: root
   with_items:
     - python-pip
-    - awscli
   tags: apt
 
 - name: install misc packages
@@ -19,6 +18,7 @@
   with_items:
     - boto
     - ansible
+    - awscli
   tags: install
 
 - name: get setup script from nodesource.com
@@ -189,6 +189,7 @@
   become: yes
   become_user: deploy
   tags: omnia
+  ignore_errors: yes
 
 - file:
     dest: /home/deploy/.ssh/id_rsa
