@@ -75,3 +75,11 @@ url = amqp://guest:guest@127.0.0.1:5672/
 [ssh_runner]
 remote_dir = /tmp
 use_paramiko_ssh_runner = True
+
+[content]
+# Path to the directory which contains system packs.
+system_packs_base_path = /opt/stackstorm/packs
+{% if st2_packs_base_paths -%}
+# Paths which will be searched for integration packs.
+packs_base_paths = {{st2_packs_base_paths}}
+{% endif %}
