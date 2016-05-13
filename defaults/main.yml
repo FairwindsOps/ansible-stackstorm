@@ -7,13 +7,9 @@ s2_external_private_key: 'external_private.key'
 
 st_infrastructure_repo: 'git@github.com:reactiveops/reactr-infrastructure.git'
 st_infrastructure_version: 'berrysmoke'
-# app_git_ref: "rt-reactiveops"
-# app_user_name: "deploy"
-# app_path: "/srv/roadtrippers"
 
 
 system_user: 'deploy'
 system_user_ssh_key_file: '/home/deploy/.ssh/id_rsa'
-
-
 st2_packer_builds_path: '/opt/packer/builds'
+st2_packs_base_paths: ''
