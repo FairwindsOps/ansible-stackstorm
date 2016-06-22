@@ -39,3 +39,5 @@ st2_stanley_username: 'deploy'
 st2_system_user: 'deploy'
 
 st2_packs_base_paths: ''
+
+st2_aio_url: 'https://raw.githubusercontent.com/StackStorm/st2workroom/ce8dbb424bfbe58224fde44217eb0dd4ade1aa25/script/bootstrap-st2'
