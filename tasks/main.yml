@@ -18,7 +18,7 @@
 
 - name: get install script
   get_url:
-    url: 'http://stackstorm.com/install.sh'
+    url: "{{st2_aio_url}}"
     dest: "{{st2_install_script_path}}"
 
 - include: configure.yml
