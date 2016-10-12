@@ -13,8 +13,11 @@
   command: "bash {{st2_install_script_path}} -a {{st2_answers_file_path}}"
   when: answers_yml.changed
 
-- name: create st2 etc dir
-  file: path=/etc/st2 owner=root group=root mode=0755 state=directory
+- name: create needed directories
+  file: path="{{ item }}" owner=root group=root mode=0755 state=directory
+  with_items:
+  - '/etc/stc'
+  - '/etc/nginx/sites-available'
 
 # The puppet installer / install.sh overwrites st2.conf with other values.
 - name: copy template st2.conf
