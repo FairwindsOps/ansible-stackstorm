@@ -16,6 +16,7 @@
    - python-mysqldb
    - awscli
    - whois
+   - nginx
   tags:
     - packages
 
