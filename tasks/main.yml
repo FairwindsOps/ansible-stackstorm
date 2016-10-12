@@ -10,6 +10,7 @@
    - python-pip
    - libffi-dev
    - python-dev
+   - libssl-dev
    - git
    - mysql-client
    - python-mysqldb
