@@ -19,6 +19,7 @@
   - '/etc/stc'
   - '/etc/nginx/sites-available'
   - '/root/.st2'
+  - '/opt/stackstorm/packs/st2'
 
 # The puppet installer / install.sh overwrites st2.conf with other values.
 - name: copy template st2.conf
