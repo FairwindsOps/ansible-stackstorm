@@ -13,6 +13,7 @@
    - mysql-client
    - python-mysqldb
    - awscli
+   - whois
   tags:
     - packages
 
