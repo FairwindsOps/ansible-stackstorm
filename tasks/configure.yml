@@ -73,6 +73,9 @@
     group: 'root'
     mode: 0755
 
+- name: create st2packs group
+  group: name=st2packs state=present
+
 - name: copy ...stackstorm/packs/st2/config.yaml
   template:
     src: 'packs-st2-config.yaml.j2'
