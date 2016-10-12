@@ -8,6 +8,7 @@
    - build-essential
    - unzip
    - python-pip
+   - libffi-dev
    - python-dev
    - git
    - mysql-client
