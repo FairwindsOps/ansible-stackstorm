@@ -14,7 +14,7 @@
   when: answers_yml.changed
 
 - name: create needed directories
-  file: path="{{ item }}" owner=root group=root mode=0755 state=directory
+  file: path="{{ item }}" mode=0755 state=directory
   with_items:
   - '/etc/stc'
   - '/etc/nginx/sites-available'
