@@ -14,7 +14,7 @@
   when: answers_yml.changed
 
 - name: create st2 etc dir
-  file: path=/etc/st2 owner=root group=root mode=0755 mode=directory
+  file: path=/etc/st2 owner=root group=root mode=0755 state=directory
 
 # The puppet installer / install.sh overwrites st2.conf with other values.
 - name: copy template st2.conf
