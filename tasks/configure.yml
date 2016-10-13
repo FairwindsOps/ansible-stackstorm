@@ -16,7 +16,7 @@
 - name: create needed directories
   file: path="{{ item }}" mode=0755 state=directory
   with_items:
-  - '/etc/stc'
+  - '/etc/st2'
   - '/etc/nginx/sites-available'
   - '/root/.st2'
   - '/opt/stackstorm/packs/st2'
