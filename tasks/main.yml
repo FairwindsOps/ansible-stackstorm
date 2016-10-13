@@ -8,11 +8,15 @@
    - build-essential
    - unzip
    - python-pip
+   - libffi-dev
    - python-dev
+   - libssl-dev
    - git
    - mysql-client
    - python-mysqldb
    - awscli
+   - whois
+   - nginx
   tags:
     - packages
 

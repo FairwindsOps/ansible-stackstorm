@@ -13,6 +13,14 @@
   command: "bash {{st2_install_script_path}} -a {{st2_answers_file_path}}"
   when: answers_yml.changed
 
+- name: create needed directories
+  file: path="{{ item }}" mode=0755 state=directory
+  with_items:
+  - '/etc/st2'
+  - '/etc/nginx/sites-available'
+  - '/root/.st2'
+  - '/opt/stackstorm/packs/st2'
+
 # The puppet installer / install.sh overwrites st2.conf with other values.
 - name: copy template st2.conf
   template:
@@ -65,6 +73,9 @@
     group: 'root'
     mode: 0755
 
+- name: create st2packs group
+  group: name=st2packs state=present
+
 - name: copy ...stackstorm/packs/st2/config.yaml
   template:
     src: 'packs-st2-config.yaml.j2'
@@ -74,4 +85,3 @@
     mode: 0775
   notify:
    - restart st2
-
