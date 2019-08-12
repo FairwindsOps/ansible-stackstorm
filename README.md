@@ -14,23 +14,23 @@ Dependencies
 This role depends on the following ansible roles:
 ```
 Stouts.users-master
-reactiveops.packer-master
+fairwinds.packer-master
 ```
 
 You should add these roles to your ansible-requirements.yml 
 
 ```
-- src: git+ssh://git@github.com/reactiveops/ansible-packer
+- src: git+ssh://git@github.com/FairwindsOps/ansible-packer
   version: origin/master
-  name: reactiveops.packer-master
+  name: fairwinds.packer-master
 
-- src: git+ssh://git@github.com/reactiveops/Stouts.users
+- src: git+ssh://git@github.com/FairwindsOps/Stouts.users
   version: origin/master
   name: Stouts.users-master
 
-- src: git+ssh://git@github.com/reactiveops/ansible-stackstorm
+- src: git+ssh://git@github.com/FairwindsOps/ansible-stackstorm
   version: origin/master
-  name: reactiveops.stackstorm-master
+  name: fairwinds.stackstorm-master
 ```
 
 Example Playbook
@@ -42,7 +42,7 @@ Example Playbook
   user: ubuntu
   gather_facts: false
   roles:
-   - reactiveops.stackstorm-master
+   - fairwinds.stackstorm-master
 ```
 
 # Notes
